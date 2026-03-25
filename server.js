@@ -1,15 +1,13 @@
-import http from "node:http";
-import url from "node:url";
+import express from "express";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
 
-const port = "3000";
-const hostname = "127.0.0.1";
+dotenv.config();
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 201;
-    res.setHeader = ("Content-Type", "text/plain");
-    res.end("testing my api live\n")
-})
+// Connect database
+connectDB();
 
-server.listen(port, () => {
-    console.log(`server is running at http//:${hostname}: ${port}/`)
-})
+const app = express();
+app.use(express.json());
+
+app.listen(5000, () => console.log("Server running on port 5000"));
